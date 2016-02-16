@@ -62,8 +62,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  <body>
       <h1>ログイン</h1>
       <form action="" method="post">
-      <p>名前: <input type="text" name="name"></p>
-      <p>メールアドレス:<input type="text" name="email"></p>
+      <p>名前: <input type="text" name="name" value="<?= $_POST['name']?>"></p>
+      <p>メールアドレス:<input type="password" name="email"></p>
       <input type="submit" value="ログイン"><br>
       <a href="signup.php">新規登録</a>
  </body>

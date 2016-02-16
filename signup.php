@@ -51,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
   <body>
 <h1>新規登録画面</h1>
       <form action="" method="post">
-      <p>名前: <input type="text" name="name">
+      <p>名前: <input type="text" name="name"></p>
       <?php if($errors['name']) :?>
         <?php echo h($errors['name']) ?>
       <?php endif ?>
@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
       </p>
       <p>メールアドレス:<input type="text" name="email"></p>
       <?php if($errors['email']) :?>
-        <?php echo h($errors['email']) ?>
+        <?php echo h($errors['email']) ?><br>
       <?php endif ?>
       <input type="submit" value="新規登録"><br>
       <a href="login.php">ログイン画面へ</a>
