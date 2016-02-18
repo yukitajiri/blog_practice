@@ -40,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         if($row)
         {
           $_SESSION['id'] = $row['id'];
+          $_SESSION['name'] = $row['name'];
           header('Location: index.php');
 
           exit;

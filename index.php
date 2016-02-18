@@ -5,11 +5,14 @@ require_once('functions.php');
 
 session_start();
 
+
 if(empty($_SESSION['id']))
 {
     header('Location: login.php');
     exit;
 }
+
+
 
 $dbh = connectDb();
 $sql = "select * from posts order by updated_at desc";
@@ -27,6 +30,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
   <h1>たじろぐ</h1>
+  <?php echo $_SESSION['name'] ?>さん、こんにちは
   <p><a href="logout.php">ログアウト</a></p>
  <a href="add.php">新規投稿記事</a>
   <h1>記事一覧</h1>
