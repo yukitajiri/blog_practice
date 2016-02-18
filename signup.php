@@ -6,6 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
 {
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
     $errors = array();
 
 // バリデーション
@@ -19,14 +20,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
         $errors['email'] = 'メールアドレスが未入力です';
     }
 
+    if(empty($password))
+    {
+        $errors['password'] = 'パスワードが未入力です';
+    }
+
+
+
     // バリデーション突破
     if(empty($errors))
     {
         $dbh = connectDb();
-        $sql = "insert into users (name, email, created_at) values (:name, :email, now())";
+        $sql = "insert into users (name, email, created_at, password) values (:name, :email, now(), :password)";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":password", $password);
 
         $stmt->execute();
 
@@ -61,6 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
       <?php if($errors['email']) :?>
         <?php echo h($errors['email']) ?><br>
       <?php endif ?>
+      <p>パスワード:<input type="text" name="password"></p>
       <input type="submit" value="新規登録"><br>
       <a href="login.php">ログイン画面へ</a>
   </body>
