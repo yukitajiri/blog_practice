@@ -31,7 +31,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
     if(empty($errors))
     {
         $dbh = connectDb();
-        $sql = "insert into users (name, email, created_at, password) values (:name, :email, now(), :password)";
+        $sql = "insert into users (name, email, created_at, password) values (:name, :email, now(), :password)
+        ";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":email", $email);
@@ -71,6 +72,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
         <?php echo h($errors['email']) ?><br>
       <?php endif ?>
       <p>パスワード:<input type="text" name="password"></p>
+      <?php if($errors['password']) :?>
+        <?php echo h($errors['password']) ?><br>
+      <?php endif ?>
       <input type="submit" value="新規登録"><br>
       <a href="login.php">ログイン画面へ</a>
   </body>
