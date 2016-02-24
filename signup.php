@@ -25,6 +25,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
         $errors['password'] = 'パスワードが未入力です';
     }
 
+    if(filter_var($email, FILTER_VALIDATE_EMALL))
+        {
+              echo '正しいメールアドレスです';
+        }
+        else{
+              echo '正しくないメールアドレスです';
+        }
 
 
     // バリデーション突破
@@ -47,10 +54,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
 }
 
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html>

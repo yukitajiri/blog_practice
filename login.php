@@ -37,6 +37,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
            $row = $stmt->fetch();
 
+
+
+// ここでindexに値をとばしている
         if($row)
         {
           $_SESSION['id'] = $row['id'];
