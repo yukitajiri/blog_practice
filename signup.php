@@ -10,6 +10,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
     $errors = array();
 
 // バリデーション
+
+
     if(empty($name))
     {
         $errors['name'] = '名前が未入力です';
@@ -17,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
 
     if(empty($email))
     {
-        $errors['email'] = 'メールアドレスが未入力です';
+        $errors['email'][] = 'メールアドレスが未入力です';
     }
 
     if(empty($password))
@@ -25,14 +27,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
         $errors['password'] = 'パスワードが未入力です';
     }
 
-    if(filter_var($email, FILTER_VALIDATE_EMALL))
-        {
-              echo '正しいメールアドレスです';
-        }
-        else{
-              echo '正しくないメールアドレスです';
+ if(! filter_var($email, FILTER_VALIDATE_EMAIL))
+       {
+             // echo '正しくないメールアドレスです';
+              $errors['email'][]= 'メールアドレスの形式ではないです';
         }
 
+// var_dump($errors);
 
     // バリデーション突破
     if(empty($errors))
@@ -72,8 +73,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
       </p>
       <p>メールアドレス:<input type="text" name="email"></p>
       <?php if($errors['email']) :?>
-        <?php echo h($errors['email']) ?><br>
-      <?php endif ?>
+      <?php foreach ($errors['email'] as $error) :?>
+          <?php echo h($error) ?>
+      <?php endforeach ?>
+    <?php endif ?>
       <p>パスワード:<input type="text" name="password"></p>
       <?php if($errors['password']) :?>
         <?php echo h($errors['password']) ?><br>
