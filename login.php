@@ -60,15 +60,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  <!DOCTYPE html>
  <html>
  <head>
-   <meta charset="utf-8">
-   <title>ログイン画面</title>
+     <meta charset="utf-8">
+     <title>ログイン画面</title>
+     <link rel="stylesheet" type="text/css" href="style.css">
  </head>
  <body>
-      <h1>ログイン</h1>
-      <form action="" method="post">
-      <p>名前: <input type="text" name="name" value="<?= $_POST['name']?>"></p>
-      <p>パスワード:<input type="password" name="password"></p>
-      <input type="submit" value="ログイン"><br>
-      <a href="signup.php">新規登録</a>
- </body>
- </html>
+  <h1 class="heading1">Log In <span class="small-font">ログイン</span></h1>
+  <div class="from-box">
+
+    <form action="" method="post">
+       <div>
+          <p>名前</p>
+          <input type="text" name="name" value="<?= $_POST['name']?>">
+      </div>
+      <div>
+      <p>パスワード</p>
+      <input type="password" name="password">
+      </div>
+      <input class="button"type="submit" value="ログイン"><br>
+      <a class="button block newaccount" href="signup.php">新規登録</a>
+
+  </div>
+</div>
+</body>
+</html>

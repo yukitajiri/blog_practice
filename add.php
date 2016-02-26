@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $errors['body'] = 'メッセージが未入力です';
   }
 
+
+
   // バリデーションを突破したあとの処理
   if (empty($errors)) {
     // データを追加する
@@ -33,6 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     exit;
   }
 }
+
+$token = session_id();
+$_SESSION['token'] = $token;
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -60,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
       <textarea name="body" cols="30" rows="5"></textarea>
     </p>
     <p><input type="submit" value="投稿する"></p>
+    <input type="hidden" name="token" value="<?php echo $token?>">
   </form>
 </body>
 </html>
