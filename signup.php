@@ -24,15 +24,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
 
     if(empty($password))
     {
-        $errors['password'] = 'パスワードが未入力です';
+        $errors['password'][] = 'パスワードが未入力です';
     }
 
  if(! filter_var($email, FILTER_VALIDATE_EMAIL))
        {
              // echo '正しくないメールアドレスです';
-              $errors['email'][]= 'メールアドレスの形式ではないです';
+              $errors['email'][] = 'メールアドレスの形式ではないです';
         }
+// パスワードの文字と文字数のバリデーション
+  if(!preg_match("/[\@-\~]/", $password))
+  {
+        $errors['password'][] = 'パスワードは半角英数字及び記号のみ入力してください';
+  }
+  // // Fatal error: Call to undefined function mb_strlen() in /var/www/html/blog_practice/signup.php on line 40というエラー
+  // elseif(mb_strlen($password) < 4 )
+  // {
+  //       $errors['password'][] = 'パスワードは4文字以上で設定してください';
+  // }
+  // elseif(mb_strlen($password) > 32)
+  // {
+  //       $errors['password'][] = 'パスワードは32文字以下で設定してください';
 
+  // }
 // var_dump($errors);
 
     // バリデーション突破
@@ -79,7 +93,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' )
     <?php endif ?>
       <p>パスワード:<input type="text" name="password"></p>
       <?php if($errors['password']) :?>
-        <?php echo h($errors['password']) ?><br>
+        <?php foreach($errors['password'] as $error_pw) :?>
+        <?php echo h($error_pw) ?><br>
+        <?php endforeach ?>
       <?php endif ?>
       <input type="submit" value="新規登録"><br>
       <a href="login.php">ログイン画面へ</a>
